@@ -70,7 +70,11 @@ app.get('/weather', (req, res) => {
                 if (forecastError) res.send({ error: 'Unable to get weather information' });
                 else {
                     res.send({
-                        forecast: forecastResponse,
+                        summary: forecastResponse.summary,
+                        forecast: forecastResponse.temperature,
+                        precipChance: forecastResponse.precipProbability,
+                        wind: forecastResponse.wind,
+                        clouds: forecastResponse.cloudCoverage,
                         location,
                         address: req.query.address
                     });

@@ -14,7 +14,13 @@ const forecast = (latitude, longitude, callback) => {
             callback({ Error: 'Location provided could not be found' });
         } else {
             const { currently } = body;
-            callback(undefined, `It is currently ${currently.temperature} degrees out. There is a ${currently.precipProbability}% chance of rain.`);
+            callback(undefined, {
+                temperature: `It is currently ${currently.temperature} degrees out.`,
+                precipProbability: `There is a ${currently.precipProbability}% chance of rain.`,
+                summary: `${currently.summary}. Feels like ${currently.apparentTemperature} degrees out.`,
+                wind: `Expect wind speed of ${currently.windSpeed}mph and wind gusts up to ${currently.windGust}mph.`,
+                cloudCoverage: `Cloud coverage rating is ${currently.cloudCover} and visibility is ${currently.visibility} miles.`
+            });
         }
     });
 
